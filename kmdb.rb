@@ -67,6 +67,18 @@
 # The Dark Knight Rises  Joseph Gordon-Levitt  John Blake
 # The Dark Knight Rises  Anne Hathaway         Selina Kyle
 
+#This part below automates the rails db:migrate call which is otherwise needed to run this code from terminal so that it's fully automatic. This came from GPT 4.0, and is beyond the scope of our class
+# Load the Rails environment
+require_relative 'config/environment'
+
+# Access the Rake application tied to your Rails app
+Rake::Task.clear # necessary to avoid duplicate tasks
+MyApplication::Application.load_tasks
+
+# Invoke the db:migrate task
+Rake::Task['db:migrate'].invoke
+
+
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
 Studio.destroy_all
@@ -136,7 +148,7 @@ puts ""
 myMovies = Movie.all
 for movie in myMovies
   # Using hash-like access for attributes
-  studio_name = Studio.find(movie["studio"]).name #Admitedly only one studio in the set, but less hard-coded this way...
+  studio_name = Studio.find(movie["studio"]).name #Admittedly only one studio in the set, but less hard-coded this way...
   puts "#{movie["title"]} #{movie["year_released"]} #{movie["rated"]} #{studio_name}"
 end
 
