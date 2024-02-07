@@ -154,7 +154,7 @@ for movie in myMovies
     for role in myCast
         # Check if the role belongs to the current movie
         if role.movie == movie.id
-            # Assuming 'actor' stores the actor's ID, find the actor for this role
+            # Find the actor for this role
             actor = Actor.find(role.actor)
             # Print the movie title, actor name, and character name
             puts "#{movie.title} #{actor.name} #{role.character_name}"
